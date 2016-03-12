@@ -39,6 +39,10 @@
 #include <sys/utsname.h>
 
 #include <gcrypt.h>
+#if defined(__sun__)
+#include <fcntl.h>
+#include <sys/types.h>
+#endif
 
 #include "crypto.h"
 #include "sysdep.h"

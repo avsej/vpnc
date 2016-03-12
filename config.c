@@ -39,6 +39,9 @@
 #include "vpnc.h"
 #include "supp.h"
 #include "decrypt-utils.h"
+#if defined(__sun__)
+#include <strings.h>
+#endif
 
 const char *config[LAST_CONFIG];
 

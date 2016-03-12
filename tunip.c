@@ -1058,7 +1058,11 @@ void vpnc_doit(struct sa_block *s)
 			 */
 			_exit(0);
 		}
+#if defined(__sun__)
+		openlog("vpnc", LOG_PID, LOG_DAEMON);
+#else
 		openlog("vpnc", LOG_PID | LOG_PERROR, LOG_DAEMON);
+#endif
 		logmsg = syslog;
 	} else {
 		printf("VPNC started in foreground...\n");

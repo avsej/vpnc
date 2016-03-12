@@ -527,7 +527,7 @@ int tun_write(int fd, unsigned char *buf, int len)
 {
 	struct strbuf sbuf;
 	sbuf.len = len;
-	sbuf.buf = buf;
+	sbuf.buf = (char *)buf;
 	return putmsg(fd, NULL, &sbuf, 0) >= 0 ? sbuf.len : -1;
 }
 
@@ -537,7 +537,7 @@ int tun_read(int fd, unsigned char *buf, int len)
 	int f = 0;
 
 	sbuf.maxlen = len;
-	sbuf.buf = buf;
+	sbuf.buf = (char *)buf;
 	return getmsg(fd, NULL, &sbuf, &f) >= 0 ? sbuf.len : -1;
 }
 #elif defined(__CYGWIN__)
@@ -681,7 +681,11 @@ int tun_get_hwaddr(int fd, char *dev, uint8_t *hwaddr)
 		return -1;
 	}
 
+#if defined(__sun__)
+	memcpy(hwaddr, &ifr.ifr_addr.sa_data, ETH_ALEN);
+#else
 	memcpy(hwaddr, &ifr.ifr_hwaddr.sa_data, ETH_ALEN);
+#endif
 
 	return 0;
 #else

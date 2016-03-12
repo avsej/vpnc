@@ -87,7 +87,7 @@ vpnc.8 : vpnc.8.template makeman.pl vpnc
 cisco-decrypt : cisco-decrypt.o decrypt-utils.o
 	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
 
-test-crypto : sysdep.o test-crypto.o crypto.o $(CRYPTO_OBJS)
+test-crypto : vpnc-debug.o decrypt-utils.o config.o supp.o sysdep.o test-crypto.o crypto.o $(CRYPTO_OBJS)
 	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
 
 .depend: $(SRCS) $(BINSRCS)

@@ -1,0 +1,9 @@
+*.o
+.depend
+cscope.out
+test-crypto
+vpnc.8
+cisco-decrypt
+vpnc
+vpnc-debug.c
+vpnc-debug.h
